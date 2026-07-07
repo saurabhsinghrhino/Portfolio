@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton+SC&family=Khand:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-Anton: "Anton SC", sans-serif;
+  --font-Khand: "Khand", sans-serif;
+}
