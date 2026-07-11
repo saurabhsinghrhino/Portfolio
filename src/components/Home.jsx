@@ -1,10 +1,9 @@
 import React from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Home from "../components/Home";
-import Orb from "../components/Orb";
+import Orb from "./Orb";
 
-const GreetPage = () => {
+const Home = () => {
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
@@ -45,7 +44,7 @@ const GreetPage = () => {
   return (
     <main className="main relative min-h-screen w-full bg-black overflow-hidden flex items-center justify-center flex-col gap-4">
       {/* Background */}
-      <div style={{ width: "100%", height: "600px", position: "relative" }}>
+      <div style={{ width: "100%", height: "800px", position: "relative" }}>
         <Orb
           hoverIntensity={2}
           rotateOnHover
@@ -56,7 +55,7 @@ const GreetPage = () => {
       </div>
 
       {/* Greeting Section */}
-      <div className="greet-first absolute  w-full flex flex-col items-center justify-center gap-3">
+      <div className="greet-first absolute w-full flex flex-col items-center justify-center gap-3">
         <h1 className="text-[#F5F5F5] text-7xl font-bold font-Khand">नमस्ते</h1>
 
         <span>
@@ -69,13 +68,8 @@ const GreetPage = () => {
       <h1 className="greet-second absolute text-[#F5F5F5] text-6xl font-bold font-Anton">
         Impress You Without Noise
       </h1>
-
-      {/* Other Sections */}
-      <div className="relative z-10">
-        <Home />
-      </div>
     </main>
   );
 };
 
-export default GreetPage;
+export default Home;

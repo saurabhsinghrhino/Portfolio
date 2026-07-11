@@ -1,10 +1,10 @@
 import React from "react";
-import GreetPage from "./pages/GreetPage";
+import Home from "./components/Home";
 
 const App = () => {
   return (
     <div className="h-screen w-full">
-      <GreetPage />
+      <Home />
     </div>
   );
 };
