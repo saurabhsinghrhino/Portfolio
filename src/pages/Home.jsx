@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loader from "../components/HomeLoader";
+import Navbar from "../components/Navbar";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -204,10 +205,7 @@ const Home = () => {
         <div className="hero-bg-orb absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-linear-to-br from-amber-400/40 via-orange-500/30  to-transparent blur-3xl pointer-events-none" />
 
         <div className="hero-content relative z-10 text-center flex flex-col items-center gap-6 px-4">
-          <h2 className="text-white text-4xl md:text-6xl font-Anton">
-            Your Hero Heading
-          </h2>
-          <p className="text-white/70 max-w-xl">Replace with your hero copy.</p>
+          <Navbar />
         </div>
       </div>
     </main>
