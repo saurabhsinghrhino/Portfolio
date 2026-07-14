@@ -100,22 +100,21 @@ export default function Navbar() {
           "-=0.3",
         );
     };
-
-    let firedByEvent = false;
-    const onLoaded = () => {
-      firedByEvent = true;
-      playEntrance();
-    };
-    window.addEventListener("app:loaded", onLoaded);
-
-    const fallback = setTimeout(() => {
-      if (!firedByEvent) playEntrance();
-    }, 1400);
-
-    return () => {
-      window.removeEventListener("app:loaded", onLoaded);
-      clearTimeout(fallback);
-    };
+  }, []);
+  useEffect(() => {
+    gsap.fromTo(
+      navRef.current,
+      {
+        opacity: 0,
+        y: -30,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power4.out",
+      },
+    );
   }, []);
 
   // ---- Word wave animation on hover ----
