@@ -124,7 +124,7 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 md:gap-10 px-6 py-3 rounded-full border border-white/10 bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 md:gap-10 px-6 py-3 rounded-full border border-white/10 bg-white/6 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
       style={{ opacity: 0 }}
     >
       {/* Brand */}

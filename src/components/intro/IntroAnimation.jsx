@@ -146,7 +146,7 @@ const IntroAnimation = ({ onComplete }) => {
           className="intro fixed inset-0 z-40 overflow-hidden bg-black flex items-center justify-center"
           style={{ clipPath: "circle(150% at 50% 50%)" }}
         >
-          <div className="glow-orb absolute w-[500px] h-[500px] rounded-full bg-gradient-to-br from-amber-400/40 via-orange-500/30 to-transparent blur-3xl" />
+          <div className="glow-orb absolute w-125 h-125 rounded-full bg-linear-to-br from-amber-400/40 via-orange-500/30 to-transparent blur-3xl" />
 
           <div className="namaste-wrap relative text-center px-4">
             {/* Devanagari rendered as one intact block — never split per-character */}
@@ -168,7 +168,7 @@ const IntroAnimation = ({ onComplete }) => {
                 </span>
               ))}
             </h2>
-            <div className="accent-line mx-auto mt-6 h-[2px] w-32 origin-center scale-x-0 bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+            <div className="accent-line mx-auto mt-6 h-0.5 w-32 origin-center scale-x-0 bg-linear-to-r from-transparent via-amber-400 to-transparent" />
           </div>
         </section>
       </main>
