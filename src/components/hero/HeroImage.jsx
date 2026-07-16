@@ -220,7 +220,11 @@ const HeroImage = forwardRef(function HeroImage(
     });
 
     entranceTlRef.current
-      .to(typography, { opacity: 0.09, y: 0, duration: 1.4 }, 0)
+      // Typography settles at 0.4 (40%) opacity — this is the ONLY place
+      // that controls final opacity now. Bump this single number if you
+      // want it stronger/weaker; don't add opacity classes on the text
+      // elements below or they'll multiply together again.
+      .to(typography, { opacity: 0.6, y: 0, duration: 1.4 }, 0)
       .to(portrait, { opacity: 1, scale: 1, duration: 1.6 }, 0.15)
       .to(
         filterProxyRef.current,
@@ -248,7 +252,13 @@ const HeroImage = forwardRef(function HeroImage(
   return (
     <div
       ref={containerRef}
-      className={`relative flex w-full items-center justify-center ${className}`}
+      // h-screen: full 100vh. Your navbar is fixed/sticky, so it
+      // doesn't take up space in the document flow — this section
+      // already starts at the very top of the page, same as the
+      // navbar's overlay origin. Using the full viewport height (with
+      // no subtraction) is what makes the bottom edge land exactly on
+      // the window's bottom edge, with the navbar floating on top.
+      className={`relative flex h-screen w-full items-center justify-center ${className}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleContainerLeave}
       aria-hidden={!src}
@@ -261,7 +271,7 @@ const HeroImage = forwardRef(function HeroImage(
       >
         {useStackedName ? (
           <div
-            className="flex flex-col items-center leading-[0.82] tracking-[0.25em] text-white opacity-[0.16] blur-[0.8px] sm:tracking-[0.34em] sm:opacity-[0.2] font-Anton uppercase"
+            className="flex flex-col items-center leading-[0.82] tracking-[0.25em] text-[#EAEDF0] sm:tracking-[0.34em] font-Anton uppercase"
             style={{ fontWeight: 900 }}
           >
             <span className="text-[clamp(3.5rem,16vw,11rem)] ">
@@ -273,7 +283,7 @@ const HeroImage = forwardRef(function HeroImage(
           </div>
         ) : (
           <span
-            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-white opacity-[0.16] blur-[0.8px] sm:tracking-[0.34em] sm:opacity-[0.2] font-Anton uppercase"
+            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-[#EAEDF0] sm:tracking-[0.34em] font-Anton uppercase"
             style={{ fontWeight: 900 }}
           >
             {displayName}
@@ -297,7 +307,7 @@ const HeroImage = forwardRef(function HeroImage(
       {/* Layer 3 — Portrait with parallax + hover reveal */}
       <div
         ref={portraitWrapRef}
-        className="relative z-[3] will-change-transform"
+        className="relative z-[3] h-full will-change-transform"
         onMouseEnter={playHoverIn}
         onMouseLeave={playHoverOut}
       >
@@ -307,7 +317,7 @@ const HeroImage = forwardRef(function HeroImage(
             src={src}
             alt=""
             draggable={false}
-            className="mx-auto block h-full w-[78vw] max-w-[820px] object-cover object-bottom will-change-[transform,filter] sm:w-[74vw] sm:max-w-[900px] md:w-[72vw] md:max-w-[980px] lg:w-[70vw] lg:max-w-[1080px] bottom-0"
+            className="mx-auto block h-full w-[72vw] max-w-[1800px] object-cover object-bottom will-change-[transform,filter] sm:w-[74vw] md:w-[76vw] lg:w-[78vw]"
             style={{
               filter: buildPortraitFilter(SILHOUETTE),
               transform: "translateZ(0)",
@@ -316,7 +326,7 @@ const HeroImage = forwardRef(function HeroImage(
         ) : (
           <div
             ref={portraitRef}
-            className="mx-auto flex h-full w-[78vw] max-w-[820px] items-end justify-center sm:h-[78vh] sm:w-[74vw] sm:max-w-[900px] md:h-[80vh] md:w-[72vw] md:max-w-[980px] lg:h-[84vh] lg:w-[70vw] lg:max-w-[1080px] bottom-0"
+            className="mx-auto flex h-full w-[72vw] max-w-[1800px] items-end justify-center sm:w-[74vw] md:w-[76vw] lg:w-[78vw]"
             aria-label="Portrait placeholder"
           >
             <div className="h-[92%] w-[72%] rounded-t-[40%] bg-[#151515] opacity-40" />

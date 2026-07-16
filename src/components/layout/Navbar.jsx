@@ -2,8 +2,23 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 const BRAND = "SRBX.";
-const NAV_LINKS = ["Home", "Projects", "About Me", "Contact Me"];
+
+// Each link now carries the id of the section it should scroll to.
+// You need a matching id="..." on the actual section element in your
+// page (e.g. <section id="projects">...</section>).
+const NAV_LINKS = [
+  { label: "Home", id: "home" },
+  { label: "Projects", id: "projects" },
+  { label: "About Me", id: "about" },
+  { label: "Contact Me", id: "contact" },
+];
+
 const MOBILE_BREAKPOINT = 550;
+
+// How much space to leave above the target section so the fixed
+// navbar doesn't cover its heading. Bump this if links still land a
+// bit too high/low under the pill-shaped nav.
+const SCROLL_OFFSET = 100;
 
 export default function Navbar() {
   const wrapperRef = useRef(null);
@@ -29,29 +44,44 @@ export default function Navbar() {
   const wasMobileRef = useRef(
     typeof window !== "undefined" && window.innerWidth < MOBILE_BREAKPOINT,
   );
+  const lastScrollYRef = useRef(
+    typeof window !== "undefined" ? window.scrollY : 0,
+  );
+  const navVisibleRef = useRef(true);
 
   const displayIndex = hoveredIndex ?? activeIndex;
 
-  const movePill = useCallback(
-    (index) => {
-      if (window.innerWidth < MOBILE_BREAKPOINT) return;
+  // ---- Smooth-scroll to a section by id, offset for the fixed navbar ----
+  const scrollToSection = useCallback((id) => {
+    if (id === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
-      const el = linkRefs.current[index];
-      const container = listRef.current;
-      if (!el || !container || !pillRef.current) return;
+    const el = document.getElementById(id);
+    if (!el) return;
 
-      const elBox = el.getBoundingClientRect();
-      const containerBox = container.getBoundingClientRect();
+    const y = el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, []);
 
-      gsap.to(pillRef.current, {
-        x: elBox.left - containerBox.left,
-        width: elBox.width,
-        duration: 0.45,
-        ease: "power3.out",
-      });
-    },
-    [],
-  );
+  const movePill = useCallback((index) => {
+    if (window.innerWidth < MOBILE_BREAKPOINT) return;
+
+    const el = linkRefs.current[index];
+    const container = listRef.current;
+    if (!el || !container || !pillRef.current) return;
+
+    const elBox = el.getBoundingClientRect();
+    const containerBox = container.getBoundingClientRect();
+
+    gsap.to(pillRef.current, {
+      x: elBox.left - containerBox.left,
+      width: elBox.width,
+      duration: 0.45,
+      ease: "power3.out",
+    });
+  }, []);
 
   const animateHamburger = useCallback((open) => {
     const [top, middle, bottom] = barRefs.current;
@@ -217,12 +247,18 @@ export default function Navbar() {
 
   const handleMobileLinkClick = (index) => {
     setActiveIndex(index);
+    scrollToSection(NAV_LINKS[index].id);
     gsap.fromTo(
       mobileLinkRefs.current[index],
       { scale: 0.96 },
       { scale: 1, duration: 0.35, ease: "back.out(2)" },
     );
     closeMobileMenu();
+  };
+
+  const handleDesktopLinkClick = (index) => {
+    setActiveIndex(index);
+    scrollToSection(NAV_LINKS[index].id);
   };
 
   useEffect(() => {
@@ -264,6 +300,56 @@ export default function Navbar() {
     });
   }, []);
 
+  // ---- Scroll direction: hide on scroll-up, reveal on scroll-down ----
+  // (Note: this is the reverse of the usual pattern most sites use —
+  // hide-down/reveal-up — but it's what you asked for.)
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const lastY = lastScrollYRef.current;
+        const wrapper = wrapperRef.current;
+        const delta = currentY - lastY;
+
+        // Ignore tiny jitters (trackpad momentum, mobile bounce) so the
+        // nav doesn't flicker on scroll positions that barely moved.
+        if (wrapper && Math.abs(delta) > 4) {
+          if (delta > 0 && !navVisibleRef.current) {
+            // scrolling down -> reveal
+            navVisibleRef.current = true;
+            gsap.to(wrapper, {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.4,
+              ease: "power3.out",
+            });
+          } else if (delta < 0 && navVisibleRef.current && currentY > 80) {
+            // scrolling up -> hide (skip near the very top so it
+            // doesn't vanish right as the page loads)
+            navVisibleRef.current = false;
+            gsap.to(wrapper, {
+              y: -100,
+              autoAlpha: 0,
+              duration: 0.4,
+              ease: "power3.out",
+            });
+          }
+        }
+
+        lastScrollYRef.current = currentY;
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div
       ref={wrapperRef}
@@ -274,13 +360,21 @@ export default function Navbar() {
         className="flex w-full items-center justify-between gap-4 rounded-full border border-white/10 bg-white/6 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl min-[550px]:w-auto min-[550px]:justify-center min-[550px]:gap-10 min-[550px]:px-6"
         style={{ opacity: 0 }}
       >
-        <span
-          ref={brandRef}
-          className="select-none text-base font-semibold tracking-tight whitespace-nowrap text-white min-[550px]:text-lg"
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            handleDesktopLinkClick(0);
+          }}
         >
-          <span className="text-amber-400">/</span>
-          {BRAND}
-        </span>
+          <span
+            ref={brandRef}
+            className="select-none text-base font-semibold tracking-tight whitespace-nowrap text-white min-[550px]:text-lg"
+          >
+            <span className="text-amber-400">/</span>
+            {BRAND}
+          </span>
+        </a>
 
         <div
           ref={dividerRef}
@@ -299,30 +393,38 @@ export default function Navbar() {
 
           {NAV_LINKS.map((link, i) => (
             <li
-              key={link}
+              key={link.id}
               ref={(el) => {
                 linkRefs.current[i] = el;
               }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
-              onClick={() => setActiveIndex(i)}
-              className={`relative z-10 cursor-pointer rounded-full px-4 py-2 whitespace-nowrap transition-colors duration-300 ${
-                i === displayIndex
-                  ? "font-medium text-black"
-                  : "text-white/70 hover:text-white"
-              }`}
+              className="relative z-10"
             >
-              {link.split("").map((char, ci) => (
-                <span
-                  key={ci}
-                  ref={(el) => {
-                    charRefs.current[i][ci] = el;
-                  }}
-                  className="inline-block"
-                >
-                  {char === " " ? "\u00A0" : char}
-                </span>
-              ))}
+              <a
+                href={`#${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDesktopLinkClick(i);
+                }}
+                className={`block cursor-pointer rounded-full px-4 py-2 whitespace-nowrap transition-colors duration-300 ${
+                  i === displayIndex
+                    ? "font-medium text-black"
+                    : "text-white/70 hover:text-white"
+                }`}
+              >
+                {link.label.split("").map((char, ci) => (
+                  <span
+                    key={ci}
+                    ref={(el) => {
+                      charRefs.current[i][ci] = el;
+                    }}
+                    className="inline-block"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                ))}
+              </a>
             </li>
           ))}
         </ul>
@@ -357,7 +459,7 @@ export default function Navbar() {
         <ul className="flex flex-col gap-1 rounded-2xl border border-white/10 bg-white/6 p-3 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl">
           {NAV_LINKS.map((link, i) => (
             <li
-              key={link}
+              key={link.id}
               ref={(el) => {
                 mobileLinkRefs.current[i] = el;
               }}
@@ -370,7 +472,7 @@ export default function Navbar() {
                   : "text-white/70"
               }`}
             >
-              {link}
+              {link.label}
             </li>
           ))}
         </ul>
