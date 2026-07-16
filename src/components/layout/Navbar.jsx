@@ -300,9 +300,7 @@ export default function Navbar() {
     });
   }, []);
 
-  // ---- Scroll direction: hide on scroll-up, reveal on scroll-down ----
-  // (Note: this is the reverse of the usual pattern most sites use —
-  // hide-down/reveal-up — but it's what you asked for.)
+  // ---- Scroll direction: hide on scroll-down, reveal on scroll-up ----
   useEffect(() => {
     let ticking = false;
 
@@ -319,8 +317,8 @@ export default function Navbar() {
         // Ignore tiny jitters (trackpad momentum, mobile bounce) so the
         // nav doesn't flicker on scroll positions that barely moved.
         if (wrapper && Math.abs(delta) > 4) {
-          if (delta > 0 && !navVisibleRef.current) {
-            // scrolling down -> reveal
+          if (delta < 0 && !navVisibleRef.current) {
+            // scrolling up -> reveal
             navVisibleRef.current = true;
             gsap.to(wrapper, {
               y: 0,
@@ -328,8 +326,8 @@ export default function Navbar() {
               duration: 0.4,
               ease: "power3.out",
             });
-          } else if (delta < 0 && navVisibleRef.current && currentY > 80) {
-            // scrolling up -> hide (skip near the very top so it
+          } else if (delta > 0 && navVisibleRef.current && currentY > 80) {
+            // scrolling down -> hide (skip near the very top so it
             // doesn't vanish right as the page loads)
             navVisibleRef.current = false;
             gsap.to(wrapper, {
