@@ -1,5 +1,6 @@
 import Navbar from "../layout/Navbar";
 import HeroBackground from "./HeroBackground";
+import HeroContent from "./HeroContent";
 import HeroImage from "./HeroImage";
 
 const Hero = ({ introFinished }) => {
@@ -12,7 +13,7 @@ const Hero = ({ introFinished }) => {
 
         <HeroImage introFinished={introFinished} />
 
-        {/* <HeroContent introFinished={introFinished} /> */}
+        <HeroContent introFinished={introFinished} />
       </section>
     </main>
   );

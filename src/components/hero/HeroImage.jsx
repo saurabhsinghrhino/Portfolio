@@ -224,7 +224,7 @@ const HeroImage = forwardRef(function HeroImage(
       // that controls final opacity now. Bump this single number if you
       // want it stronger/weaker; don't add opacity classes on the text
       // elements below or they'll multiply together again.
-      .to(typography, { opacity: 0.6, y: 0, duration: 1.4 }, 0)
+      .to(typography, { opacity: 0.4, y: 0, duration: 1.4 }, 0)
       .to(portrait, { opacity: 1, scale: 1, duration: 1.6 }, 0.15)
       .to(
         filterProxyRef.current,
@@ -271,7 +271,7 @@ const HeroImage = forwardRef(function HeroImage(
       >
         {useStackedName ? (
           <div
-            className="flex flex-col items-center leading-[0.82] tracking-[0.25em] text-[#EAEDF0] sm:tracking-[0.34em] font-Anton uppercase"
+            className="flex flex-col items-center leading-[0.82] tracking-[0.25em] text-[#C8A96A] sm:tracking-[0.34em] font-Anton uppercase"
             style={{ fontWeight: 900 }}
           >
             <span className="text-[clamp(3.5rem,16vw,11rem)] ">
@@ -283,7 +283,7 @@ const HeroImage = forwardRef(function HeroImage(
           </div>
         ) : (
           <span
-            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-[#EAEDF0] sm:tracking-[0.34em] font-Anton uppercase"
+            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-[#C8A96A] sm:tracking-[0.34em] font-Anton uppercase"
             style={{ fontWeight: 900 }}
           >
             {displayName}
@@ -317,6 +317,11 @@ const HeroImage = forwardRef(function HeroImage(
             src={src}
             alt=""
             draggable={false}
+            // Width: 72-78% of viewport, generous max-w so it never
+            // artificially plateaus like the old fixed px caps did.
+            // Height: h-full now resolves against the wrapper's real
+            // height (inherited from the container above), so
+            // object-cover actually has something to crop into.
             className="mx-auto block h-full w-[72vw] max-w-[1800px] object-cover object-bottom will-change-[transform,filter] sm:w-[74vw] md:w-[76vw] lg:w-[78vw]"
             style={{
               filter: buildPortraitFilter(SILHOUETTE),
