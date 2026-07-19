@@ -385,7 +385,7 @@ export default function Navbar() {
         >
           <div
             ref={pillRef}
-            className="absolute top-0 left-0 h-full rounded-full bg-blue-400 shadow-[0_0_20px_rgba(14, 9, 168, 0.8)] transition-all duration-100 pointer-events-none"
+            className="absolute top-0 left-0 h-full rounded-full bg-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.55)]"
             style={{ zIndex: 0, width: 0 }}
           />
 
@@ -405,10 +405,10 @@ export default function Navbar() {
                   e.preventDefault();
                   handleDesktopLinkClick(i);
                 }}
-                className={`block cursor-pointer rounded-full px-4 py-2 font-Anton whitespace-nowrap transition-colors duration-300 ${
+                className={`block cursor-pointer rounded-full px-4 py-2 whitespace-nowrap transition-colors duration-300 ${
                   i === displayIndex
-                    ? " text-white"
-                    : "text-white/70 hover:text-black "
+                    ? "font-medium text-black"
+                    : "text-white/70 hover:text-white"
                 }`}
               >
                 {link.label.split("").map((char, ci) => (

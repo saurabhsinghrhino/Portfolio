@@ -19,7 +19,7 @@ export default function Loader({ onComplete }) {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-9999 flex flex-col items-center justify-center bg-[#050505]">
+    <div className="fixed inset-0 z-9999 flex flex-col items-center justify-center overflow-x-hidden bg-[#050505]">
       <h1 className="mb-6 text-6xl font-Anton text-white">{progress}%</h1>
 
       <p className="text-lg tracking-[0.35em] uppercase text-gray-400">
