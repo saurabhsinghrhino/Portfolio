@@ -5,3 +5,10 @@
   --font-Anton: "Anton SC", sans-serif;
   --font-Khand: "Khand", sans-serif;
 }
+@theme {
+  --color-background: #0a0a0a;
+  --color-secondary: #151515;
+  --color-text: #f5f5f5;
+  --color-accent: #c8a96a;
+  --color-border: #2a2a2a;
+}

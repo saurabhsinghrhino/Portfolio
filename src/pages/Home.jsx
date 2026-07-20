@@ -3,7 +3,6 @@ import IntroAnimation from "../components/intro/IntroAnimation";
 import Hero from "../components/hero/Hero";
 import { useState } from "react";
 import About from "../components/about/About";
-
 const Home = () => {
   const [introFinished, setIntroFinished] = useState(false);
 
