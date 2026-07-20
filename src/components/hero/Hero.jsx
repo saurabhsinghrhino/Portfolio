@@ -7,8 +7,7 @@ const Hero = ({ introFinished }) => {
   return (
     <main className="relative min-h-screen w-full bg-[#0A0A0A]">
       {introFinished && <Navbar />}
-
-      <section className="relative flex min-h-screen items-center justify-center">
+      <section className="sticky top-0 h-screen overflow-hidden">
         <HeroBackground />
 
         <HeroImage introFinished={introFinished} />

@@ -405,7 +405,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleDesktopLinkClick(i);
                 }}
-                className={`block cursor-pointer rounded-full px-4 py-2 whitespace-nowrap transition-colors duration-300 ${
+                className={`block cursor-pointer rounded-full px-4 py-2 font-bold font-Khand transition-all duration-400 ease-in-out whitespace-nowrap  ${
                   i === displayIndex
                     ? "font-medium text-black"
                     : "text-white/70 hover:text-white"

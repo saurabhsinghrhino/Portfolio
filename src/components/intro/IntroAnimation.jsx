@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,6 +10,14 @@ const IntroAnimation = ({ onComplete }) => {
   const tl = useRef(null);
 
   const namasteLetters = "Namaste".split("");
+  useEffect(() => {
+    // Disable scrolling while loader + intro are running
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   useGSAP(
     () => {

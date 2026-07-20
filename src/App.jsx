@@ -5,7 +5,7 @@ import useLenis from "./hooks/useLenis";
 const App = () => {
   useLenis();
   return (
-    <div className="h-screen w-full">
+    <div className="min-h-screen w-full">
       <Home />
     </div>
   );

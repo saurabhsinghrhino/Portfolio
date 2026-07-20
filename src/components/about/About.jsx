@@ -3,12 +3,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import portraitSrc from "../../assets/Me1.png";
-import useLenis from "../../hooks/useLenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  useLenis();
   const containerRef = useRef(null);
 
   useGSAP(
@@ -152,11 +150,12 @@ const About = () => {
   return (
     <section
       ref={containerRef}
-      className="about-section relative w-full h-screen bg-black overflow-x-hidden select-none"
+      id="about"
+      className="about-section relative w-full h-screen bg-[radial-gradient(ellipse_at_bottom,var(--tw-gradient-stops))] from-amber-400 via-black to-black rounded-t-[44px] md:rounded-t-[56px] shadow-[0_-24px_48px_rgba(0,0,0,0.8)] border-t border-white/5 overflow-hidden select-none"
     >
       {/* 1. Large Hero Typography */}
-      <h2 className="typography-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-Khand font-bold tracking-wide text-[22vw] uppercase tracking-tighter text-accent leading-none whitespace-nowrap pointer-events-none opacity-0 will-change-transform">
-        मैं कौन हूं ?
+      <h2 className="typography-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-Anton text-[22vw] uppercase tracking-tighter text-accent leading-none whitespace-nowrap pointer-events-none opacity-0 will-change-transform">
+        WHO I AM ?
       </h2>
 
       {/* 2. Portrait */}
