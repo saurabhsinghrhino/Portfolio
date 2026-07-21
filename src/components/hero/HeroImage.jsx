@@ -266,7 +266,7 @@ const HeroImage = forwardRef(function HeroImage(
       {/* Layer 1 — Monumental typography (behind everything) */}
       <div
         ref={typographyRef}
-        className="hero-bg-text pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center"
+        className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center"
         aria-hidden="true"
       >
         {useStackedName ? (
@@ -283,7 +283,7 @@ const HeroImage = forwardRef(function HeroImage(
           </div>
         ) : (
           <span
-            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-[#C8A96A] sm:tracking-[0.34em] font-Anton uppercase"
+            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-[#C8A96A] sm:tracking-[0.34em] font-Bubble uppercase"
             style={{ fontWeight: 900 }}
           >
             {displayName}
@@ -294,20 +294,20 @@ const HeroImage = forwardRef(function HeroImage(
       {/* Layer 2 — Blue ambient + golden glow */}
       <div
         ref={ambientRef}
-        className="hero-ambient-glow pointer-events-none absolute z-[1] h-[55%] w-[70%] max-w-2xl rounded-full bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.22)_0%,transparent_70%)] blur-2xl will-change-[opacity,transform]"
+        className="pointer-events-none absolute z-[1] h-[55%] w-[70%] max-w-2xl rounded-full bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.22)_0%,transparent_70%)] blur-2xl will-change-[opacity,transform]"
         aria-hidden="true"
       />
 
       <div
         ref={glowRef}
-        className="hero-glow-orb pointer-events-none absolute z-[2] h-[62%] w-[58%] max-w-xl rounded-full bg-[radial-gradient(ellipse_at_center,rgba(200,169,106,0.45)_0%,rgba(200,169,106,0.08)_45%,transparent_72%)] blur-3xl will-change-[opacity,transform]"
+        className="pointer-events-none absolute z-[2] h-[62%] w-[58%] max-w-xl rounded-full bg-[radial-gradient(ellipse_at_center,rgba(200,169,106,0.45)_0%,rgba(200,169,106,0.08)_45%,transparent_72%)] blur-3xl will-change-[opacity,transform]"
         aria-hidden="true"
       />
 
       {/* Layer 3 — Portrait with parallax + hover reveal */}
       <div
         ref={portraitWrapRef}
-        className="hero-portrait-wrap relative z-[3] h-full will-change-transform"
+        className="relative z-[3] h-full will-change-transform"
         onMouseEnter={playHoverIn}
         onMouseLeave={playHoverOut}
       >

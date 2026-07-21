@@ -49,30 +49,30 @@ const HeroContent = ({ introFinished }) => {
     <>
       {/* Left Bottom */}
       <div className="hero-left absolute bottom-12 left-12 z-20 hidden lg:flex flex-col">
-        <span className="mb-2 text-xs uppercase tracking-[0.35em] text-[#C8A96A]">
+        <span className="mb-2 text-xs uppercase font-Bubble tracking-[0.35em] text-[#C8A96A]">
           Current Role
         </span>
 
-        <h2 className="text-3xl font-black uppercase leading-none text-[#F5F5F5]">
+        <h2 className="text-3xl font-Bubble uppercase leading-none text-[#F5F5F5]">
           Full Stack
         </h2>
 
-        <h2 className="text-3xl font-black uppercase leading-none text-[#F5F5F5]">
+        <h2 className="text-3xl font-Bubble uppercase leading-none text-[#F5F5F5]">
           AI Developer
         </h2>
       </div>
 
       {/* Right Bottom */}
       <div className="hero-right absolute bottom-12 right-12 z-20 hidden lg:flex flex-col text-right">
-        <h2 className="text-5xl font-black uppercase leading-[0.95] tracking-tight text-[#F5F5F5]">
+        <h2 className="text-5xl font-Bubble uppercase leading-[0.95] tracking-tight text-[#F5F5F5]">
           BUILDING DIGITAL
         </h2>
 
-        <h2 className="text-5xl font-black uppercase leading-[0.95] tracking-tight text-[#F5F5F5]">
+        <h2 className="text-5xl font-Bubble uppercase leading-[0.95] tracking-tight text-[#F5F5F5]">
           PRODUCTS
         </h2>
 
-        <h2 className="text-5xl font-black uppercase leading-[0.95] tracking-tight text-[#C8A96A]">
+        <h2 className="text-5xl font-Bubble uppercase leading-[0.95] tracking-tight text-[#C8A96A]">
           FOR HUMANS.
         </h2>
       </div>

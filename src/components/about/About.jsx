@@ -151,10 +151,10 @@ const About = () => {
     <section
       ref={containerRef}
       id="about"
-      className="about-section relative w-full h-screen bg-[radial-gradient(ellipse_at_bottom,var(--tw-gradient-stops))] from-amber-400 via-black to-black rounded-t-[44px] md:rounded-t-[56px] shadow-[0_-24px_48px_rgba(0,0,0,0.8)] border-t border-white/5 overflow-hidden select-none"
+      className="about-section relative w-full h-screen bg-[#0A0A0A] overflow-hidden select-none"
     >
       {/* 1. Large Hero Typography */}
-      <h2 className="typography-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-Anton text-[22vw] uppercase tracking-tighter text-accent leading-none whitespace-nowrap pointer-events-none opacity-0 will-change-transform">
+      <h2 className="typography-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-TFMadloud text-[15vw] uppercase tracking-tighter text-neutral-100 leading-none whitespace-nowrap pointer-events-none opacity-0 will-change-transform">
         WHO I AM ?
       </h2>
 
@@ -189,7 +189,7 @@ const About = () => {
       </div>
 
       {/* 4. Timeline */}
-      <div className="timeline-wrapper absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
+      <div className="timeline-wrapper absolute inset-0 z-30 flex items-center justify-center pointer-events-none ">
         {/* Simple vertical line */}
         <div className="timeline-line absolute left-[10%] md:left-1/2 top-[20vh] bottom-[20vh] w-[2px] bg-accent/20 origin-top scale-y-0 -translate-x-1/2 will-change-transform" />
 

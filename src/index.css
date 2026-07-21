@@ -1,9 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton+SC&family=Khand:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Bubble";
+  src: url("./assets/fonts/ThatSoundsGreat-yYLE3.ttf");
+}
+@font-face {
+  font-family: "TF Madloud";
+  src: url("./assets/fonts/TfMadloudDemoRegular-jE6Y7.ttf");
+}
+
 @theme {
   --font-Anton: "Anton SC", sans-serif;
   --font-Khand: "Khand", sans-serif;
+  --font-Bubble: "Bubble", sans-serif;
+  --font-TFMadloud: "TF Madloud", sans-serif;
 }
 @theme {
   --color-background: #0a0a0a;
