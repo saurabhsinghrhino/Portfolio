@@ -151,10 +151,10 @@ const About = () => {
     <section
       ref={containerRef}
       id="about"
-      className="about-section relative w-full h-screen bg-[#0A0A0A] overflow-hidden select-none"
+      className="about-section relative w-full h-screen bg-[#111111] overflow-hidden select-none"
     >
       {/* 1. Large Hero Typography */}
-      <h2 className="typography-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-TFMadloud text-[15vw] uppercase tracking-tighter text-neutral-100 leading-none whitespace-nowrap pointer-events-none opacity-0 will-change-transform">
+      <h2 className="typography-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 font-Bubble text-[15vw] uppercase tracking-tighter text-neutral-100 leading-none whitespace-nowrap pointer-events-none opacity-0 will-change-transform">
         WHO I AM ?
       </h2>
 
