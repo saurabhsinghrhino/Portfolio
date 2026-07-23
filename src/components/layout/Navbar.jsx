@@ -285,11 +285,20 @@ export default function Navbar() {
   }, [closeMobileMenu, displayIndex, movePill]);
 
   useEffect(() => {
-    gsap.fromTo(
-      navRef.current,
-      { opacity: 0, y: -30 },
-      { opacity: 1, y: 0, duration: 1, ease: "power4.out" },
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        navRef.current,
+        { opacity: 0, y: -30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power4.out",
+          clearProps: "opacity",
+        },
+      );
+    });
+    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
@@ -352,10 +361,11 @@ export default function Navbar() {
     <div
       ref={wrapperRef}
       className="fixed top-6 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 flex-col gap-2 min-[550px]:w-auto min-[550px]:max-w-none"
+      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
     >
       <nav
         ref={navRef}
-        className="flex w-full items-center justify-between gap-4 rounded-full border border-white/10 bg-white/6 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl min-[550px]:w-auto min-[550px]:justify-center min-[550px]:gap-10 min-[550px]:px-6"
+        className="flex w-full items-center justify-between gap-4 rounded-full border border-white/10 bg-white/6 px-5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl min-[550px]:w-auto min-[550px]:justify-center min-[550px]:gap-4 min-[550px]:px-4 md:gap-6 md:px-5 lg:gap-10 lg:px-6"
         style={{ opacity: 0 }}
       >
         <a
@@ -381,7 +391,7 @@ export default function Navbar() {
 
         <ul
           ref={listRef}
-          className="relative hidden items-center gap-1 text-sm min-[550px]:flex min-[550px]:gap-2"
+          className="relative hidden min-w-0 items-center gap-1 text-sm min-[550px]:flex min-[550px]:gap-1 md:gap-2"
         >
           <div
             ref={pillRef}
@@ -430,7 +440,7 @@ export default function Navbar() {
         <button
           ref={menuBtnRef}
           type="button"
-          className="relative flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 min-[550px]:hidden"
+          className="relative flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 min-[550px]:hidden"
           onClick={toggleMobileMenu}
           onMouseEnter={handleMenuBtnEnter}
           onMouseLeave={handleMenuBtnLeave}
@@ -448,7 +458,6 @@ export default function Navbar() {
           ))}
         </button>
       </nav>
-
       <div
         ref={mobileMenuRef}
         className="overflow-hidden min-[550px]:hidden"

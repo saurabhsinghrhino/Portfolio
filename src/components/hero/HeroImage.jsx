@@ -283,7 +283,7 @@ const HeroImage = forwardRef(function HeroImage(
           </div>
         ) : (
           <span
-            className="text-center text-[clamp(3.5rem,18vw,12rem)] leading-none tracking-[0.25em] text-[#C8A96A] sm:tracking-[0.34em] font-Bubble uppercase"
+            className="block w-full max-w-full text-center text-[clamp(2.25rem,12vw,12rem)] leading-[1.05] tracking-[0.08em] sm:tracking-[0.18em] md:tracking-[0.28em] lg:tracking-[0.34em] text-[#C8A96A] font-Bubble uppercase break-words px-2"
             style={{ fontWeight: 900 }}
           >
             {displayName}
