@@ -104,7 +104,7 @@ export default function SceneWhoIAm() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-[#111111]"
+      className="relative h-screen w-full overflow-hidden bg-[#ffffff]"
       aria-label="Who I am — introduction"
     >
       {/* Stage: centers the title initially, holds it as it migrates upward */}
@@ -119,12 +119,12 @@ export default function SceneWhoIAm() {
       tracking-normal
       whitespace-nowrap
       text-[clamp(2.25rem,14vw,16rem)]
-      text-[#F5F5F5]
+      text-[#000000]
       will-change-transform
     "
           style={{ opacity: 0 }}
         >
-          WHO <span className="text-[#C8A96A]">I</span> AM
+          WHO <span className="text-[#a97108]">I</span> AM
         </h1>
       </div>
 
