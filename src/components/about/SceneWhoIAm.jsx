@@ -112,7 +112,7 @@ export default function SceneWhoIAm() {
         <h1
           ref={titleRef}
           className="
-      font-Bubble
+      font-Anton
       select-none
       text-center
       leading-[1.1]
